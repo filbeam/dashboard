@@ -25,7 +25,7 @@ SELECT
   worker_ttfb_p50,
   worker_ttfb_p90,
   worker_ttfb_p99
-FRworker
+FROM
   retrieval_logs,
   percentiles;
 `,
