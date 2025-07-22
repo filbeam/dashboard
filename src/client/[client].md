@@ -54,10 +54,7 @@ const totalEgress = filteredStats.reduce(
   (acc, item) => acc + item.total_egress_gib,
   0,
 )
-const totalCacheMissEgress = filteredStats.reduce(
-  (acc, item) => acc + item.total_cache_miss_egress_gib,
-  0,
-)
+
 const cacheHitRate = totalRequests
   ? ((cacheHitRequests / totalRequests) * 100).toFixed(2)
   : 0
@@ -67,10 +64,9 @@ const cacheHitRate = totalRequests
 
 <div class="divider"></div>
 
-<div class="grid grid-cols-4">
+<div class="grid grid-cols-3">
   <h4 class="font-normal">Total Requests: ${totalRequests.toLocaleString()}</h4>
   <h4 class="font-normal">Total Egress: ${totalEgress.toLocaleString()} GiB</h4>
-  <h4 class="font-normal">Total Cache Miss Egress: ${totalCacheMissEgress.toLocaleString()} GiB</h4>
   <h4 class="font-normal">Cache Hit Rate: ${cacheHitRate}%</h4>
 </div>
 
