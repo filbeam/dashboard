@@ -7,6 +7,7 @@ const {
   options: { client: { type: 'string' } },
 })
 
+// TODO: Add proof-set stats after proof-set id column is added to retrieval logs 
 const response = await query(
   `
   SELECT
