@@ -7,7 +7,6 @@ const {
   options: { client: { type: 'string' } },
 })
 
-
 const response = await query(
   `
   SELECT

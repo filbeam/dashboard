@@ -1,6 +1,8 @@
-import { query } from "./src/data/cloudflare-client.js"
+import { query } from './src/data/cloudflare-client.js'
 
-const { result: [ { results: clients } ] } = await query(`
+const {
+  result: [{ results: clients }],
+} = await query(`
   SELECT
     DISTINCT payer
   FROM 

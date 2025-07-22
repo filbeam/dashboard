@@ -42,18 +42,24 @@ const filteredStats = stats.filter((item) => {
   const date = new Date(item.day)
   return date >= new Date(start) && date <= new Date(end)
 })
-const totalRequests = filteredStats.reduce((acc, item) => acc + item.total_requests, 0)
+const totalRequests = filteredStats.reduce(
+  (acc, item) => acc + item.total_requests,
+  0,
+)
 const cacheHitRequests = filteredStats.reduce(
   (acc, item) => acc + item.cache_hit_requests,
   0,
 )
-const totalEgress = filteredStats.reduce((acc, item) => acc + item.total_egress_gib, 0)
-const totalCacheMissEgress = filteredStats.reduce((acc, item) => acc + item.total_cache_miss_egress_gib, 0)
+const totalEgress = filteredStats.reduce(
+  (acc, item) => acc + item.total_egress_gib,
+  0,
+)
+const totalCacheMissEgress = filteredStats.reduce(
+  (acc, item) => acc + item.total_cache_miss_egress_gib,
+  0,
+)
 const cacheHitRate = totalRequests
-  ? (
-      (cacheHitRequests / totalRequests) *
-      100
-    ).toFixed(2)
+  ? ((cacheHitRequests / totalRequests) * 100).toFixed(2)
   : 0
 ```
 
