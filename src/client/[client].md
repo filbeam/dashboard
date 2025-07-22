@@ -94,7 +94,7 @@ const proofSetStatsTable = Inputs.table(proofSetStats, {
   rows: 16,
   format: {
     proof_set_id: (v) =>
-      htl.html`<a href="https://pdp.vxb.ai/${network}/proofsets/${v}">${v}</a>`,
+      htl.html`<a href="https://pdp.vxb.ai/${network}/proofsets/${v}" target="_blank" rel="noopener noreferrer">${v}</a>`,
   },
   header: {
     proof_set_id: 'Proof-Set ID',
