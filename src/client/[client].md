@@ -87,10 +87,25 @@ const cacheHitRate = totalRequests
   }</div>
 </div>
 
-<div class="divider"></div>
+```js
+// TODO: Load network from config
+const network = 'calibration'
+const proofSetStatsTable = Inputs.table(proofSetStats, {
+  rows: 16,
+  format: {
+    proof_set_id: (v) =>
+      htl.html`<a href="https://pdp.vxb.ai/${network}/proofsets/${v}">${v}</a>`,
+  },
+  header: {
+    proof_set_id: 'Proof-Set ID',
+  },
+})
+```
 
+<div class="divider"></div>
+<h4>Proof-Set Stats</h4>
 <div class="card" style="padding: 0;">
-  ${Inputs.table(proofSetStats)}
+  ${proofSetStatsTable}
 </div>
 
 <style>
