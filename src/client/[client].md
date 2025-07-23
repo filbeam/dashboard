@@ -21,7 +21,7 @@ const proofSetStats = FileAttachment(
     <h2>FilCDN Dashboard</h2>
 </div>
 
-<h4>Client Stats Summary</h4>
+<h3>Client Stats Summary for ${observable.params.client}</h3>
 <body>This sections shows the summary of client statistics over the selected date range.</body>
 
 ```js
@@ -60,8 +60,6 @@ const cacheHitRate = totalRequests
   : 0
 ```
 
-<h3>Stats for ${observable.params.client}</h3>
-
 <div class="divider"></div>
 
 <div class="grid grid-cols-3">
@@ -86,16 +84,25 @@ const cacheHitRate = totalRequests
 ```js
 // TODO: Load network from config
 const network = 'calibration'
-const proofSetStatsTable = Inputs.table(proofSetStats, {
-  rows: 16,
-  format: {
-    proof_set_id: (v) =>
-      htl.html`<a href="https://pdp.vxb.ai/${network}/proofsets/${v}" target="_blank" rel="noopener noreferrer">${v}</a>`,
+
+const proofSetStatsTable = Inputs.table(
+  proofSetStats.map((item) => {
+    return {
+      ...item,
+      explorer: `https://pdp.vxb.ai/${network}/proofsets/${item.proof_set_id}`,
+    }
+  }),
+  {
+    rows: 16,
+    align: {
+      proof_set_id: 'left',
+      explorer: 'left',
+    },
+    format: {
+      explorer: (v) => htl.html`<a href="${v}">View in Explorer 🔎</a>`,
+    },
   },
-  header: {
-    proof_set_id: 'Proof-Set ID',
-  },
-})
+)
 ```
 
 <div class="divider"></div>
