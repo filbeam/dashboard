@@ -90,14 +90,13 @@ const proofSetStatsTable = Inputs.table(
     return {
       ...item,
       explorer: `https://pdp.vxb.ai/${network}/proofsets/${item.proof_set_id}`,
+      cache_hit_rate: item.total_requests
+        ? ((item.cache_hit_requests / item.total_requests) * 100).toFixed(2)
+        : 0,
     }
   }),
   {
     rows: 16,
-    align: {
-      proof_set_id: 'left',
-      explorer: 'left',
-    },
     format: {
       explorer: (v) => htl.html`<a href="${v}">View in Explorer 🔎</a>`,
     },

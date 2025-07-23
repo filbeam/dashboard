@@ -13,7 +13,6 @@ const response = await query(
     DATE(timestamp) AS day,
     client_address,
     COUNT(*) AS total_requests,
-    SUM(CASE WHEN cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
     ROUND(SUM(egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
     SUM(CASE WHEN cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
     SUM(CASE WHEN NOT cache_miss THEN 1 ELSE 0 END) AS cache_hit_requests
