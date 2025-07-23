@@ -26,7 +26,8 @@ const proofSetStats = FileAttachment(
 
 ```js
 const startDate = getDateXDaysAgo(180)
-const minStartDate = '2025-06-01'
+// Start date set to date when we added proof-set id to retrieval logs
+const minStartDate = '2025-07-22'
 const start = view(
   Inputs.date({
     label: 'Start',
