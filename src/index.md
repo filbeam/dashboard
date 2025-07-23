@@ -205,7 +205,7 @@ const clientStats = Inputs.table(ClientStats, {
   rows: 16,
   format: {
     client_address: (v) =>
-      htl.html`<a href=./client/${v} target=_blank>${v}</a>`,
+      htl.html`<a href=./client/${v}>${v}</a>`,
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
   },
