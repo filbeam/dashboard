@@ -1,3 +1,20 @@
+import { query } from './src/data/cloudflare-client.js'
+
+const {
+  result: [{ results: clients }],
+} = await query(`
+  SELECT
+    DISTINCT payer
+  FROM 
+    indexer_proof_set_rails
+  WHERE
+    with_cdn = true
+  ORDER BY
+    payer
+`)
+
+const clientPaths = clients.map((c) => `/client/${c.payer}`)
+
 // See https://observablehq.com/framework/config for documentation.
 export default {
   // The app’s title; used in the sidebar and webpage titles.
@@ -35,4 +52,5 @@ export default {
   // typographer: false, // smart quotes and other typographic improvements
   // preserveExtension: false, // drop .html from URLs
   // preserveIndex: false, // drop /index from URLs
+  dynamicPaths: [...clientPaths],
 }
