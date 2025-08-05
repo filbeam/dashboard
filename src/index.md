@@ -42,18 +42,33 @@ const cacheHitRate = PlatformStats.total_requests
 
 <h4>All time Stats</h4>
 
+```js
+const workerLatency = Inputs.table(
+  [5, 50, 95, 99].map((percentile) => ({
+    percentile: `p${percentile}`,
+    ttfb: PlatformStats[`worker_ttfb_p${percentile}`],
+  })),
+  {
+    layout: 'auto',
+    format: {
+      ttfb: (v) => v.toFixed(2) ?? 'N/A',
+    },
+    header: {
+      percentile: 'Percentile',
+      ttfb: 'TTFB (ms)',
+    },
+  },
+)
+```
+
 <div class="grid grid-cols-4">
   <h4 class="font-normal">Requests Served: ${PlatformStats.total_requests}</h4>
   <h4 class="font-normal">Bytes Served: ${formatBytesIEC(PlatformStats.total_egress_bytes)}</h4>
   <h4 class="font-normal">Cache Hit Rate: ${cacheHitRate}%</h4>
   <div class="flex flex-col items-center">
-    <h4 class="font-normal">Worker TTFB (ms)</h4>
-    <div class="text-sm text-center">
-      <div>P10: ${PlatformStats.worker_ttfb_p10?.toFixed(2) ?? 'N/A'}</div>
-      <div>P50: ${PlatformStats.worker_ttfb_p50?.toFixed(2) ?? 'N/A'}</div>
-      <div>P90: ${PlatformStats.worker_ttfb_p90?.toFixed(2) ?? 'N/A'}</div>
-      <div>P99: ${PlatformStats.worker_ttfb_p99?.toFixed(2) ?? 'N/A'}</div>
-    </div>
+    <h4 class="font-normal">Worker Latency</h4>
+    <p>(Time to send the first byte to the client)</p>
+    <div class="card" style="padding: 0;">${workerLatency}</div>
   </div>
 </div>
 
