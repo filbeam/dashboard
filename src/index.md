@@ -62,12 +62,23 @@ const workerLatency = Inputs.table(
 ```
 
 <div class="grid grid-cols-4">
-  <h4 class="font-normal">Requests Served: ${PlatformStats.total_requests}</h4>
-  <h4 class="font-normal">Bytes Served: ${formatBytesIEC(PlatformStats.total_egress_bytes)}</h4>
-  <h4 class="font-normal">Cache Hit Rate: ${cacheHitRate}%</h4>
   <div class="flex flex-col items-center">
-    <h4 class="font-normal">Worker Latency</h4>
-    <p>(Time to send the first byte to the client)</p>
+    <h4 class="font-normal">Requests Served</h4>
+    <div class="card card-figure">${PlatformStats.total_requests}</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">Bytes Served</h4>
+    <div class="card card-figure">${formatBytesIEC(PlatformStats.total_egress_bytes)}</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">Cache Hit Rate</h4>
+    <div class="card card-figure">${cacheHitRate}%</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">
+      Worker Latency
+      <span class="tooltip" data-tooltip="Time to send the first byte to the client."></span>
+    </h4>
     <div class="card" style="padding: 0;">${workerLatency}</div>
   </div>
 </div>
@@ -246,7 +257,7 @@ const clientStats = Inputs.table(ClientStats, {
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  font-size: 4vw;
+  font-size: 3vw;
   color: #E30ADA;
 }
 
@@ -295,6 +306,46 @@ const clientStats = Inputs.table(ClientStats, {
   .hero h1 {
     font-size: 90px;
   }
+}
+
+.tooltip {
+  position:relative; /* making the .tooltip span a container for the tooltip text */
+}
+
+.tooltip:after {
+  content: " ?⃝";
+}
+
+.tooltip:before {
+  content: attr(data-tooltip);
+  position: absolute;
+  z-index: 100;
+
+  /* vertically center */
+  top: 50%;
+  transform: translateY(-100%);
+
+  /* move to right */
+  left: 100%;
+  margin-left: 5px; /* and add a small left margin */
+
+  /* basic styles */
+  width: 200px;
+  padding: 1em;
+  border-radius: 0.75rem;
+  background: var(--theme-background-alt);
+  color: var(--theme-foreground);
+  border: solid 1px var(--theme-foreground-muted);
+  font-weight: normal;
+  font-size: 0.75rem;
+  text-align: left;
+  text-wrap: wrap;
+
+  display: none; /* hide by default */
+}
+
+.tooltip:hover:before {
+  display:block;
 }
 
 </style>
