@@ -40,26 +40,52 @@ const cacheHitRate = PlatformStats.total_requests
   : 0
 ```
 
-<h4>All time Stats</h4>
+<h2>All time Stats</h2>
 
-<div class="grid grid-cols-4">
-  <h4 class="font-normal">Requests Served: ${PlatformStats.total_requests}</h4>
-  <h4 class="font-normal">Bytes Served: ${formatBytesIEC(PlatformStats.total_egress_bytes)}</h4>
-  <h4 class="font-normal">Cache Hit Rate: ${cacheHitRate}%</h4>
+```js
+const workerLatency = Inputs.table(
+  [5, 50, 95, 99].map((percentile) => ({
+    percentile: `p${percentile}`,
+    ttfb: PlatformStats[`worker_ttfb_p${percentile}`],
+  })),
+  {
+    layout: 'auto',
+    format: {
+      ttfb: (v) => v.toFixed(2) ?? 'N/A',
+    },
+    header: {
+      percentile: 'Percentile',
+      ttfb: 'TTFB (ms)',
+    },
+  },
+)
+```
+
+<div class="grid grid-cols-3">
   <div class="flex flex-col items-center">
-    <h4 class="font-normal">Worker TTFB (ms)</h4>
-    <div class="text-sm text-center">
-      <div>P10: ${PlatformStats.worker_ttfb_p10?.toFixed(2) ?? 'N/A'}</div>
-      <div>P50: ${PlatformStats.worker_ttfb_p50?.toFixed(2) ?? 'N/A'}</div>
-      <div>P90: ${PlatformStats.worker_ttfb_p90?.toFixed(2) ?? 'N/A'}</div>
-      <div>P99: ${PlatformStats.worker_ttfb_p99?.toFixed(2) ?? 'N/A'}</div>
-    </div>
+    <h4 class="font-normal">Requests Served</h4>
+    <div class="card card-figure">${PlatformStats.total_requests}</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">Bytes Served</h4>
+    <div class="card card-figure">${formatBytesIEC(PlatformStats.total_egress_bytes)}</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">Cache Hit Rate</h4>
+    <div class="card card-figure">${cacheHitRate}%</div>
+  </div>
+</div>
+
+<div class="grid grid-cols-3">
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal">Worker Response Time</h4>
+    <div class="card" style="padding: 0;">${workerLatency}</div>
   </div>
 </div>
 
 <div class="divider"></div>
 
-<h4>Daily Stats</h4>
+<h2>Daily Stats</h2>
 
 <div class="grid grid-cols-2" style="grid-auto-rows: 500px;">
   <div class="card">${
@@ -195,7 +221,7 @@ const spStats = Inputs.table(StorageProviderStats, {
 ```
 
 <div class="divider"></div>
-<h4>Storage Provider Stats</h4>
+<h2>Storage Provider Stats</h2>
 <div class="card" style="padding: 0;">
   ${spStats}
 </div>
@@ -220,7 +246,7 @@ const clientStats = Inputs.table(ClientStats, {
 ```
 
 <div class="divider"></div>
-<h4>Client Stats</h4>
+<h2>Client Stats</h2>
 <div class="card" style="padding: 0;">
   ${clientStats}
 </div>
@@ -231,7 +257,7 @@ const clientStats = Inputs.table(ClientStats, {
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  font-size: 4vw;
+  font-size: 3vw;
   color: #E30ADA;
 }
 
