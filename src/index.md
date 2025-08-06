@@ -40,7 +40,7 @@ const cacheHitRate = PlatformStats.total_requests
   : 0
 ```
 
-<h4>All time Stats</h4>
+<h2>All time Stats</h2>
 
 ```js
 const workerLatency = Inputs.table(
@@ -85,7 +85,7 @@ const workerLatency = Inputs.table(
 
 <div class="divider"></div>
 
-<h4>Daily Stats</h4>
+<h2>Daily Stats</h2>
 
 <div class="grid grid-cols-2" style="grid-auto-rows: 500px;">
   <div class="card">${
@@ -221,7 +221,7 @@ const spStats = Inputs.table(StorageProviderStats, {
 ```
 
 <div class="divider"></div>
-<h4>Storage Provider Stats</h4>
+<h2>Storage Provider Stats</h2>
 <div class="card" style="padding: 0;">
   ${spStats}
 </div>
@@ -246,7 +246,7 @@ const clientStats = Inputs.table(ClientStats, {
 ```
 
 <div class="divider"></div>
-<h4>Client Stats</h4>
+<h2>Client Stats</h2>
 <div class="card" style="padding: 0;">
   ${clientStats}
 </div>
