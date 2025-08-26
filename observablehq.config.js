@@ -1,19 +1,27 @@
 import { query } from './src/data/cloudflare-client.js'
 
-const {
-  result: [{ results: clients }],
-} = await query(`
-  SELECT
-    DISTINCT payer
-  FROM 
-    indexer_proof_set_rails
-  WHERE
-    with_cdn = true
-  ORDER BY
-    payer
-`)
+let clientPaths = []
+let clients = []
 
-const clientPaths = clients.map((c) => `/client/${c.payer}`)
+try {
+  const {
+    result: [{ results: clients }],
+  } = await query(`
+    SELECT
+      DISTINCT payer
+    FROM 
+      indexer_proof_set_rails
+    WHERE
+      with_cdn = true
+    ORDER BY
+      payer
+  `)
+  
+  clientPaths = clients.map((c) => `/client/${c.payer}`)
+} catch (error) {
+  console.log('Error fetching clients:', error.message)
+  clientPaths = []
+}
 
 // See https://observablehq.com/framework/config for documentation.
 export default {
