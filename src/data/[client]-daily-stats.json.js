@@ -19,7 +19,8 @@ const response = await query(
   FROM
     retrieval_logs
   WHERE
-    client_address = $1
+    client_address = $1 AND
+    DATE(timestamp) < DATE('now')
   GROUP BY
     day, client_address
   ORDER BY

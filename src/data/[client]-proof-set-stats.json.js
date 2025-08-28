@@ -20,7 +20,8 @@ const response = await query(
   LEFT JOIN
     retrieval_logs rl ON rl.proof_set_id = ipr.proof_set_id
   WHERE
-    payer = $1 AND with_cdn = true
+      payer = $1 AND with_cdn = true AND
+    (rl.timestamp IS NULL OR DATE(rl.timestamp) < DATE('now'))
   GROUP BY
     ipr.proof_set_id
   ORDER BY
