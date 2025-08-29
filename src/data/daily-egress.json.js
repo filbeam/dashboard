@@ -6,6 +6,8 @@ const response = await query(
   ROUND(SUM(egress_bytes) / 1073741824.0, 2) AS total_egress_gib
 FROM
   retrieval_logs
+WHERE
+  DATE(timestamp) < DATE('now')
 GROUP BY
   day
 ORDER BY

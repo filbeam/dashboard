@@ -10,7 +10,8 @@ WITH retrieval_speeds AS (
         retrieval_logs
     WHERE
         cache_miss = 1 AND
-        fetch_ttlb > 0
+        fetch_ttlb > 0 AND
+        DATE(timestamp) < DATE('now')
 ),
 percentile_buckets AS (
   SELECT 
