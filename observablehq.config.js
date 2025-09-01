@@ -42,7 +42,10 @@ export default {
   // Some additional configuration options and their defaults:
   theme: 'light', // try "light", "dark", "slate", etc.
   // header: "", // what to show in the header (HTML)
-  // footer: "Built with Observable.", // what to show in the footer (HTML)
+  footer: `
+    Built on ${new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })} |
+    <a href="https://github.com/filcdn/dashboard" target="_blank" rel="noopener noreferrer">View Source on GitHub</a>
+  `, // what to show in the footer (HTML)
   sidebar: false, // whether to show the sidebar
   // toc: true, // whether to show the table of contents
   // pager: true, // whether to show previous & next links in the footer
