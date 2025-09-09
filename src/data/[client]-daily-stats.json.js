@@ -11,7 +11,7 @@ const response = await query(
   `
   SELECT
       DATE(rl.timestamp) AS day,
-      ds.payer_address AS client_address,
+      ds.payer_address,
       COUNT(rl.id) AS total_requests,
       ROUND(SUM(rl.egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
       SUM(CASE WHEN rl.cache_miss = 1 THEN 1 ELSE 0 END) AS cache_miss_requests,
@@ -21,9 +21,9 @@ const response = await query(
   JOIN
       data_sets ds ON rl.data_set_id = ds.id
   WHERE
-      client_address = $1
+      ds.payer_address = $1
   GROUP BY
-      day, client_address
+      day, ds.payer_address
   ORDER BY
       day DESC;
 `,

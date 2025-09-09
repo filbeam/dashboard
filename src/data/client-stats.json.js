@@ -3,7 +3,7 @@ import { query } from './cloudflare-client.js'
 const response = await query(
   `
   SELECT
-    ds.payer_address AS client_address,
+    ds.payer_address,
     COUNT(*) AS total_requests,
     SUM(CASE WHEN rl.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
     SUM(rl.egress_bytes) AS total_egress_bytes,
@@ -13,7 +13,7 @@ const response = await query(
   JOIN
     data_sets ds ON ds.id = rl.data_set_id
   GROUP BY
-    client_address
+    ds.payer_address
   ORDER BY
     total_requests DESC;
 `,
