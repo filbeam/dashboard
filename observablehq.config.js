@@ -4,13 +4,13 @@ const {
   result: [{ results: clients }],
 } = await query(`
   SELECT
-    DISTINCT payer
+    DISTINCT payer_address
   FROM 
-    indexer_proof_set_rails
+    data_sets
   WHERE
     with_cdn = true
   ORDER BY
-    payer
+    payer_address;
 `)
 
 const clientPaths = clients.map((c) => `/client/${c.payer}`)
