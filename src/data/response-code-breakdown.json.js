@@ -8,8 +8,6 @@ WITH daily_totals AS (
     COUNT(*) AS total_requests
   FROM
     retrieval_logs
-  WHERE
-    DATE(timestamp) < DATE('now')
   GROUP BY
     day
 )
@@ -20,8 +18,6 @@ SELECT
 FROM
   retrieval_logs r
   JOIN daily_totals dt ON DATE(r.timestamp) = dt.day
-WHERE
-  DATE(r.timestamp) < DATE('now')
 GROUP BY
   day,
   code

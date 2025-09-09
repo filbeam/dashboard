@@ -5,7 +5,7 @@ title: Client Summary
 
 ```js
 import { LineGraph } from '../components/line-graph.js'
-import { getDateXDaysAgo } from '../utils/date-utils.js'
+import { getDateXDaysAgo, todayInFormat } from '../utils/date-utils.js'
 import { formatBytesIEC } from '../utils/bytes.js'
 
 const stats = FileAttachment(
@@ -35,7 +35,7 @@ const start = view(
       new Date(startDate) >= new Date(minStartDate) ? startDate : minStartDate,
   }),
 )
-const end = view(Inputs.date({ label: 'End', value: getDateXDaysAgo(1) }))
+const end = view(Inputs.date({ label: 'End', value: todayInFormat() }))
 ```
 
 ```js

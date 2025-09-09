@@ -22,7 +22,6 @@ const response = await query(
       data_sets ds ON rl.data_set_id = ds.id
   WHERE
       client_address = $1
-      AND DATE(rl.timestamp) < DATE('now')
   GROUP BY
       day, client_address
   ORDER BY
