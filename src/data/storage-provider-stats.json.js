@@ -46,7 +46,7 @@ SELECT
             AND pb.percentile_bucket = 96 -- 96th bucket represents the 95th percentile
     ) AS p95_cache_miss_retrieval_speed_mbps,
     ROUND(
-        100.0 * SUM(CASE WHEN j.cache_miss AND j.response_status = 200 THEN 1 ELSE 0 END)
+        100.0 * SUM(CASE WHEN spr.cache_miss AND spr.response_status = 200 THEN 1 ELSE 0 END)
         / NULLIF(SUM(CASE WHEN spr.cache_miss THEN 1 ELSE 0 END), 0), 2
     ) AS cache_miss_rsr
 FROM
