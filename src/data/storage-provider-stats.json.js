@@ -42,7 +42,7 @@ SELECT
         FROM
             percentile_buckets pb
         WHERE
-            pb.service_provider_id = j.service_provider_id
+            pb.service_provider_id = spr.service_provider_id
             AND pb.percentile_bucket = 96 -- 96th bucket represents the 95th percentile
     ) AS p95_cache_miss_retrieval_speed_mbps,
     ROUND(
