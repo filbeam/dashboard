@@ -15,7 +15,7 @@ retrieval_speeds AS (
     SELECT
         service_provider_id,
         (egress_bytes * 8.0) / (fetch_ttlb / 1000.0) / 1_000_000 AS retrieval_speed_mbps
-    FROM joined
+    FROM service_provider_retrievals
     WHERE
         cache_miss = 1 AND
         fetch_ttlb > 0
