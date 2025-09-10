@@ -2,7 +2,7 @@ import { query } from './cloudflare-client.js'
 
 const response = await query(
   `
-WITH joined AS (
+WITH service_provider_retrievals AS (
     SELECT
         rl.*,
         ds.service_provider_id,
@@ -28,14 +28,14 @@ percentile_buckets AS (
   FROM retrieval_speeds
 )
 SELECT
-    j.service_provider_id,
-    j.service_url,
+    spr.service_provider_id,
+    spr.service_url,
     COUNT(*) AS total_requests,
-    SUM(CASE WHEN j.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
-    SUM(j.egress_bytes) AS total_egress_bytes,
-    SUM(CASE WHEN j.cache_miss THEN j.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
-    AVG(CASE WHEN j.cache_miss THEN j.fetch_ttfb ELSE NULL END) AS avg_ttfb,
-    ROUND(AVG(CASE WHEN j.cache_miss THEN (j.egress_bytes * 8.0) / (j.fetch_ttlb / 1000.0) / 1_000_000 ELSE NULL END), 2) AS avg_cache_miss_retrieval_speed_mbps,
+    SUM(CASE WHEN spr.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
+    SUM(spr.egress_bytes) AS total_egress_bytes,
+    SUM(CASE WHEN spr.cache_miss THEN spr.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
+    AVG(CASE WHEN spr.cache_miss THEN spr.fetch_ttfb ELSE NULL END) AS avg_ttfb,
+    ROUND(AVG(CASE WHEN spr.cache_miss THEN (spr.egress_bytes * 8.0) / (spr.fetch_ttlb / 1000.0) / 1_000_000 ELSE NULL END), 2) AS avg_cache_miss_retrieval_speed_mbps,
     (
         SELECT
             MIN(pb.retrieval_speed_mbps)
@@ -47,12 +47,12 @@ SELECT
     ) AS p95_cache_miss_retrieval_speed_mbps,
     ROUND(
         100.0 * SUM(CASE WHEN j.cache_miss AND j.response_status = 200 THEN 1 ELSE 0 END)
-        / NULLIF(SUM(CASE WHEN j.cache_miss THEN 1 ELSE 0 END), 0), 2
+        / NULLIF(SUM(CASE WHEN spr.cache_miss THEN 1 ELSE 0 END), 0), 2
     ) AS cache_miss_rsr
 FROM
-    joined j
+    service_provider_retrievals spr
 GROUP BY
-    j.service_provider_id
+    spr.service_provider_id
 ORDER BY
     total_requests DESC;
 `,

@@ -9,7 +9,9 @@ WITH retrieval_speeds AS (
     FROM
         retrieval_logs
     WHERE 
-        cache_miss = 1 AND fetch_ttlb > 0 
+        day < DATE('now') AND
+        cache_miss = 1 AND 
+        fetch_ttlb > 0 
 ),
 percentile_buckets AS (
   SELECT 

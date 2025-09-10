@@ -21,7 +21,8 @@ const response = await query(
   JOIN
       data_sets ds ON rl.data_set_id = ds.id
   WHERE
-      ds.payer_address = $1
+      ds.payer_address = $1 AND
+      day < DATE('now')
   GROUP BY
       day, ds.payer_address
   ORDER BY

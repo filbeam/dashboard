@@ -7,6 +7,8 @@ const response = await query(
     COUNT(id) AS total_requests
   FROM
     retrieval_logs
+  WHERE
+    day < DATE('now')
   GROUP BY
     day
   ORDER BY

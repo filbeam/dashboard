@@ -20,7 +20,8 @@ const response = await query(
   LEFT JOIN
       retrieval_logs rl ON rl.data_set_id = ds.id
   WHERE
-      ds.payer_address = $1 AND ds.with_cdn = 1
+      ds.payer_address = $1 AND ds.with_cdn = 1 AND
+      (rl.timestamp IS NULL OR DATE(rl.timestamp) < DATE('now'))
   GROUP BY
       data_set_id
   ORDER BY
