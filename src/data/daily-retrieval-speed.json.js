@@ -8,16 +8,16 @@ WITH retrieval_speeds AS (
         (egress_bytes * 8.0) / (fetch_ttlb / 1000.0) / 1_000_000 AS retrieval_speed_mbps
     FROM
         retrieval_logs
-    WHERE 
-        cache_miss = 1 AND 
-        day < DATE('now') AND
-        fetch_ttlb > 0 
+    WHERE
+        cache_miss = 1 AND
+        fetch_ttlb > 0 AND
+        DATE(timestamp) < DATE('now')
 ),
 percentile_buckets AS (
   SELECT 
     day,
     retrieval_speed_mbps,
-    NTILE(100) OVER (ORDER BY retrieval_speed_mbps) as percentile_bucket
+    NTILE(100) OVER (ORDER BY retrieval_speed_mbps) as percentile_bucket -- Create 100 buckets for percentiles
   FROM retrieval_speeds
 )
 SELECT

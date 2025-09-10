@@ -9,7 +9,7 @@ WITH daily_totals AS (
   FROM
     retrieval_logs
   WHERE
-    day < DATE('now')
+    DATE(timestamp) < DATE('now')
   GROUP BY
     day
 )
@@ -19,8 +19,9 @@ SELECT
   (COUNT(*) * 1.0) / dt.total_requests AS rate
 FROM
   retrieval_logs r
-JOIN daily_totals dt ON DATE(r.timestamp) = dt.day
-WHERE day < DATE('now')
+  JOIN daily_totals dt ON DATE(r.timestamp) = dt.day
+WHERE
+  DATE(r.timestamp) < DATE('now')
 GROUP BY
   day,
   code
