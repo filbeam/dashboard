@@ -10,21 +10,23 @@ const {
 const response = await query(
   `
   SELECT
-    DATE(timestamp) AS day,
-    client_address,
-    COUNT(*) AS total_requests,
-    ROUND(SUM(egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
-    SUM(CASE WHEN cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
-    SUM(CASE WHEN NOT cache_miss THEN 1 ELSE 0 END) AS cache_hit_requests
+      DATE(rl.timestamp) AS day,
+      ds.payer_address,
+      COUNT(rl.id) AS total_requests,
+      ROUND(SUM(rl.egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
+      SUM(CASE WHEN rl.cache_miss = 1 THEN 1 ELSE 0 END) AS cache_miss_requests,
+      SUM(CASE WHEN rl.cache_miss = 0 THEN 1 ELSE 0 END) AS cache_hit_requests
   FROM
-    retrieval_logs
+      retrieval_logs rl
+  JOIN
+      data_sets ds ON rl.data_set_id = ds.id
   WHERE
-    client_address = $1 AND
-    DATE(timestamp) < DATE('now')
+      ds.payer_address = $1 AND
+      day < DATE('now')
   GROUP BY
-    day, client_address
+      day, ds.payer_address
   ORDER BY
-    day DESC;
+      day DESC;
 `,
   [client],
 )
