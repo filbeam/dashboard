@@ -13,7 +13,7 @@ const {
     payer_address;
 `)
 
-const clientPaths = clients.map((c) => `/client/${c.payer}`)
+const clientPaths = clients.map((c) => `/client/${c.payer_address}`)
 
 // See https://observablehq.com/framework/config for documentation.
 export default {
