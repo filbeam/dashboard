@@ -29,6 +29,7 @@ const DailyRetrievalSpeed = FileAttachment(
 <div class="hero">
   <body><a href="https://filcdn.com" target="_blank" rel="noopener noreferrer"><img src="media/filcdn-logo.png" alt="FilCDN Logo" width="300" /></a><body>
     <h2>FilCDN Dashboard</h2>
+    <h3><a href="https://dashboard.filcdn.com"><code>mainnet</code></a> - <a href="https://calibration.dashboard.filcdn.com"><code>calibration</code></a></h3>
 </div>
 
 ```js
