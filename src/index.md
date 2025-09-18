@@ -25,7 +25,6 @@ const DailyRetrievalSpeed = FileAttachment(
   './data/daily-retrieval-speed.json',
 ).json()
 const { NETWORK } = FileAttachment('./data/network.json').json()
-console.log({ NETWORK })
 
 document.body.dataset.network = NETWORK
 ```
