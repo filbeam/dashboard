@@ -24,7 +24,7 @@ const ResponseCodeBreakdown = FileAttachment(
 const DailyRetrievalSpeed = FileAttachment(
   './data/daily-retrieval-speed.json',
 ).json()
-const { NETWORK } = FileAttachment('./data/network.json').json()
+const { NETWORK } = await FileAttachment('./data/network.json').json()
 
 document.body.dataset.network = NETWORK
 ```
