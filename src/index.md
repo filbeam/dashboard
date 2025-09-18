@@ -24,12 +24,20 @@ const ResponseCodeBreakdown = FileAttachment(
 const DailyRetrievalSpeed = FileAttachment(
   './data/daily-retrieval-speed.json',
 ).json()
+const { NETWORK = 'calibration' } = FileAttachment('./data/network.json')
+console.log({ NETWORK })
+
+document.body.dataset.network = NETWORK
 ```
 
 <div class="hero">
   <body><a href="https://filcdn.com" target="_blank" rel="noopener noreferrer"><img src="media/filcdn-logo.png" alt="FilCDN Logo" width="300" /></a><body>
     <h2>FilCDN Dashboard</h2>
-    <h3><a href="https://dashboard.filcdn.com"><code>mainnet</code></a> - <a href="https://calibration.dashboard.filcdn.com"><code>calibration</code></a></h3>
+    <div>
+      <a href="https://dashboard.filcdn.com" data-network='mainnet'><code>mainnet</code></a>
+      -
+      <a href="https://calibration.dashboard.filcdn.com" data-network="calibration"><code>calibration</code></a>
+    </div>
 </div>
 
 ```js
@@ -307,6 +315,11 @@ const clientStats = Inputs.table(ClientStats, {
   .hero h1 {
     font-size: 90px;
   }
+}
+
+body[data-network=mainnet] [data-network=mainnet],
+body[data-network=calibration] [data-network=calibration] {
+  font-weight: bold;
 }
 
 </style>
