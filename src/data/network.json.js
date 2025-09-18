@@ -1,1 +1,3 @@
-process.stdout.write(JSON.stringify({ NETWORK: process.env.NETWORK }))
+process.stdout.write(
+  JSON.stringify({ NETWORK: process.env.NETWORK || 'calibration' }),
+)
