@@ -16,6 +16,9 @@ jobs:
       contents: read
       deployments: write
     environment: default
+    strategy:
+      matrix:
+        network: [calibration, mainnet]
 
     steps:
       - name: Checkout repository
@@ -32,7 +35,7 @@ jobs:
           curl --fail-with-body -X POST \
             -H "Authorization: Bearer ${{ secrets.CLOUDFLARE_API_TOKEN }}" \
             -H "Content-Type: application/json" \
-            https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/filcdn-dashboard/deployments
+            https://api.cloudflare.com/client/v4/accounts/${{ secrets.CLOUDFLARE_ACCOUNT_ID }}/pages/projects/filcdn-dashboard-${{ matrix.network }}/deployments
 
       - if: failure()
         uses: slackapi/slack-github-action@v2.0.0
@@ -42,13 +45,13 @@ jobs:
           payload: |
             {
               "channel": "alerts",
-              "text": "Deployment of `${{ github.event.repository.name }}` failed",
+              "text": "Deployment of `${{ github.event.repository.name }}` to `${{ matrix.network }}` failed",
               "blocks": [
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ":warning: *<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Deployment of `${{ github.event.repository.name }}` failed>*"
+                    "text": ":warning: *<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|Deployment of `${{ github.event.repository.name }}` to `${{ matrix.network }}` failed>*"
                   }
                 }
               ]

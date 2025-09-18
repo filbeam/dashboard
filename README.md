@@ -1,6 +1,6 @@
 # FilCDN Dashboard
 
-This is an [Observable Framework](https://observablehq.com/framework) app running at https://dashboard.filspark.com.
+This is an [Observable Framework](https://observablehq.com/framework) app running at https://dashboard.filcdn.com and https://dashboard.calibration.filcdn.com.
 
 ## Development
 
