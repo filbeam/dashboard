@@ -68,7 +68,7 @@ const workerLatency = Inputs.table(
   </div>
   <div class="flex flex-col items-center">
     <h4 class="font-normal">Bytes Served</h4>
-    <div class="card card-figure">${formatBytesIEC(PlatformStats.total_egress_bytes)}</div>
+    <div class="card card-figure">${formatBytesIEC(PlatformStats.total_egress_bytes || 0)}</div>
   </div>
   <div class="flex flex-col items-center">
     <h4 class="font-normal">Cache Hit Rate</h4>
