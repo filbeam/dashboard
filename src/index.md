@@ -30,8 +30,8 @@ document.body.dataset.network = NETWORK
 ```
 
 <div class="hero">
-  <body><a href="https://filcdn.com" target="_blank" rel="noopener noreferrer"><img src="media/filcdn-logo.png" alt="FilCDN Logo" width="300" /></a><body>
-    <h2>FilCDN Dashboard</h2>
+  <body><a href="https://filcdn.com" target="_blank" rel="noopener noreferrer"><img src="media/filcdn-logo.png" alt="Filecoin Beam Logo" width="300" /></a><body>
+    <h2>Filecoin Beam Dashboard</h2>
     <div>
       <a href="https://dashboard.filcdn.com" data-network='mainnet'><code>mainnet</code></a>
       -
