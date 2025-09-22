@@ -31,3 +31,5 @@ const response = await query(
 )
 
 process.stdout.write(JSON.stringify(response.result[0].results))
+
+

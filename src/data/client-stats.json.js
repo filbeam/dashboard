@@ -1,7 +1,6 @@
 import { query } from './cloudflare-client.js'
 
-const response = await query(
-  `
+const response = await query(`
   SELECT
     client_address,
     COUNT(*) AS total_requests,
@@ -14,8 +13,8 @@ const response = await query(
     client_address
   ORDER BY
     total_requests DESC;
-`,
-  [],
-)
+`, [])
 
-process.stdout.write(JSON.stringify(response.result[0].results))
+const results = response?.result?.[0]?.results || []
+process.stdout.write(JSON.stringify(results))
+

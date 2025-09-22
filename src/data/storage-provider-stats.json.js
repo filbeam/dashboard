@@ -50,4 +50,6 @@ ORDER BY
   [],
 )
 
-process.stdout.write(JSON.stringify(response.result[0].results))
+const results = response?.result?.[0]?.results || [];
+process.stdout.write(JSON.stringify(results));
+

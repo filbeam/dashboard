@@ -17,7 +17,7 @@ percentile_buckets AS (
   SELECT 
     day,
     retrieval_speed_mbps,
-    NTILE(100) OVER (ORDER BY retrieval_speed_mbps) as percentile_bucket -- Create 100 buckets for percentiles
+    NTILE(100) OVER (ORDER BY retrieval_speed_mbps) as percentile_bucket
   FROM retrieval_speeds
 )
 SELECT
@@ -30,7 +30,7 @@ SELECT
             percentile_buckets pb
         WHERE
             pb.day = rs.day AND
-            pb.percentile_bucket = 96 -- 96th bucket represents the 95th percentile
+            pb.percentile_bucket = 96
     ) AS p95_retrieval_speed_mbps
 FROM
     retrieval_speeds rs
@@ -42,4 +42,6 @@ ORDER BY
   [],
 )
 
-process.stdout.write(JSON.stringify(response.result[0].results))
+// Guard against null results
+const results = response?.result?.[0]?.results || []
+process.stdout.write(JSON.stringify(results))

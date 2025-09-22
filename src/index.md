@@ -39,6 +39,50 @@ const cacheHitRate = PlatformStats.total_requests
     ).toFixed(2)
   : 0
 ```
+<h2>Service Level Indicators</h2>
+
+```js
+const badBitsData = await FileAttachment('./data/bad_bits.json').json();
+
+// Make sure every row has the needed fields
+badBitsData.forEach(r => {
+  r.cache_hit_requests = r.cache_hit_requests || 0;
+  r.response_code = r.response_code || 200; // or some default
+  r.ttfb = r.ttfb || 0;
+});
+
+// Compute Cache Hit Ratio
+const totalRequests = badBitsData.length;
+const cacheHitRequests = badBitsData.reduce((sum, r) => sum + r.cache_hit_requests, 0);
+const cacheHitRatio30d = totalRequests ? ((cacheHitRequests / totalRequests) * 100).toFixed(2) : 0;
+
+// Compute Availability
+const successResponses = badBitsData.reduce((sum, r) => sum + (r.response_code === 200 ? 1 : 0), 0);
+const availability30d = totalRequests ? ((successResponses / totalRequests) * 100).toFixed(2) : 0;
+
+// Compute 95th Percentile TTFB
+const ttfbValues = badBitsData.map(r => r.ttfb).sort((a,b) => a-b);
+const index95 = Math.floor(ttfbValues.length * 0.95);
+const ttfbP95_30d = ttfbValues[index95] ?? 'N/A';
+
+````
+
+<div class="grid grid-cols-3 gap-4">
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal text-center">Cache Hit Ratio</h4>
+    <div class="card card-figure">${cacheHitRatio30d}%</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal text-center">Availability</h4>
+    <div class="card card-figure">${availability30d}%</div>
+  </div>
+  <div class="flex flex-col items-center">
+    <h4 class="font-normal text-center">95th Percentile TTFB</h4>
+    <div class="card card-figure">${ttfbP95_30d} ms</div>
+  </div>
+</div>
+
+<br/>
 
 <h2>All time Stats</h2>
 
