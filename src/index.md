@@ -30,12 +30,12 @@ document.body.dataset.network = NETWORK
 ```
 
 <div class="hero">
-  <body><a href="https://filcdn.com" target="_blank" rel="noopener noreferrer"><img src="media/filcdn-logo.png" alt="FilBeam Logo" width="300" /></a><body>
+  <body><a href="https://filbeam.com" target="_blank" rel="noopener noreferrer"><img src="media/filbeam-logo.png" alt="FilBeam Logo" width="300" /></a><body>
     <h2>FilBeam Dashboard</h2>
     <div>
-      <a href="https://dashboard.filcdn.com" data-network='mainnet'><code>mainnet</code></a>
+      <a href="https://dashboard.filbeam.com" data-network='mainnet'><code>mainnet</code></a>
       -
-      <a href="https://calibration.dashboard.filcdn.com" data-network="calibration"><code>calibration</code></a>
+      <a href="https://calibration.dashboard.filbeam.com" data-network="calibration"><code>calibration</code></a>
     </div>
 </div>
 

@@ -34,7 +34,7 @@ export default {
   // ],
 
   // Content to add to the head of the page, e.g. for a favicon:
-  head: '<link rel="icon" href="media/filcdn-logo.png" type="image/png" sizes="32x32"><script defer data-domain="dashboard.filcdn.com" src="https://plausible.io/js/script.js"></script>',
+  head: '<link rel="icon" href="media/filbeam-logo.png" type="image/png" sizes="32x32"><script defer data-domain="dashboard.filbeam.com" src="https://plausible.io/js/script.js"></script>',
 
   // The path to the source root.
   root: 'src',

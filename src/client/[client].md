@@ -17,7 +17,7 @@ const proofSetStats = FileAttachment(
 ```
 
 <div class="hero">
-  <body><a href="/"><img src="../media/filcdn-logo.png" alt="FilBeam Logo" width="300" /></a><body>
+  <body><a href="/"><img src="../media/filbeam-logo.png" alt="FilBeam Logo" width="300" /></a><body>
     <h2>FilBeam Dashboard</h2>
 </div>
 
