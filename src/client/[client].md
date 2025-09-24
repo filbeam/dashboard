@@ -17,8 +17,8 @@ const proofSetStats = FileAttachment(
 ```
 
 <div class="hero">
-  <body><a href="/"><img src="../media/filcdn-logo.png" alt="Filecoin Beam Logo" width="300" /></a><body>
-    <h2>Filecoin Beam Dashboard</h2>
+  <body><a href="/"><img src="../media/filcdn-logo.png" alt="FilBeam Logo" width="300" /></a><body>
+    <h2>FilBeam Dashboard</h2>
 </div>
 
 <h3>Client Stats Summary for ${observable.params.client}</h3>
