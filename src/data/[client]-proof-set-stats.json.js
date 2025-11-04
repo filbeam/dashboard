@@ -12,11 +12,11 @@ const response = await query(
   SELECT
       ds.id AS data_set_id,
       COUNT(rl.id) AS total_requests,
-      ROUND(SUM(rl.egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
+      SUM(rl.egress_bytes) AS total_egress_used,
       SUM(CASE WHEN rl.cache_miss = 1 THEN 1 ELSE 0 END) AS cache_miss_requests,
       SUM(CASE WHEN rl.cache_miss = 0 THEN 1 ELSE 0 END) AS cache_hit_requests,
       ds.cdn_egress_quota,
-      ds.cache_miss_egress_quota,
+      ds.cache_miss_egress_quota
   FROM
       data_sets ds
   LEFT JOIN
