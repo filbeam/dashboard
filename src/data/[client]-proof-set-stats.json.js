@@ -15,8 +15,8 @@ const response = await query(
       ROUND(SUM(rl.egress_bytes) / 1073741824.0, 2) AS total_egress_gib,
       SUM(CASE WHEN rl.cache_miss = 1 THEN 1 ELSE 0 END) AS cache_miss_requests,
       SUM(CASE WHEN rl.cache_miss = 0 THEN 1 ELSE 0 END) AS cache_hit_requests,
-      ROUND(SUM(ds.cdn_egress_quota) / 1073741824.0, 2) AS remaining_cdn_egress_gib,
-      ROUND(SUM(ds.cache_miss_egress_quota) / 1073741824.0, 2) AS remaining_cache_miss_egress_gib
+      ROUND(ds.cdn_egress_quota / 1073741824.0, 2) AS remaining_cdn_egress_gib,
+      ROUND(ds.cache_miss_egress_quota / 1073741824.0, 2) AS remaining_cache_miss_egress_gib
   FROM
       data_sets ds
   LEFT JOIN
