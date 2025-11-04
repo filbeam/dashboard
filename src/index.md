@@ -251,6 +251,8 @@ const clientStats = Inputs.table(ClientStats, {
     payer_address: 'address',
     total_egress_bytes: 'total_egress_used',
     cache_miss_egress_bytes: 'cache_miss_egress_used',
+    remaining_cdn_egress_bytes: 'remaining_cdn_egress',
+    remaining_cache_miss_egress_bytes: 'remaining_cache_miss_egress',
   },
 })
 ```
