@@ -100,6 +100,13 @@ const proofSetStatsTable = Inputs.table(
     rows: 16,
     format: {
       explorer: (v) => htl.html`<a href="${v}">View in Explorer 🔎</a>`,
+      total_egress_used: (v) => formatBytesIEC(v),
+      cdn_egress_quota: (v) => formatBytesIEC(v),
+      cache_miss_egress_quota: (v) => formatBytesIEC(v),
+    },
+    header: {
+      cdn_egress_quota: 'remaining_cdn_egress',
+      cache_miss_egress_quota: 'remaining_cache_miss_egress',
     },
   },
 )
