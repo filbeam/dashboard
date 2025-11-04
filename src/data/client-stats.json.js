@@ -8,6 +8,8 @@ const response = await query(
     SUM(CASE WHEN rl.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
     SUM(rl.egress_bytes) AS total_egress_bytes,
     SUM(CASE WHEN rl.cache_miss THEN egress_bytes ELSE 0 END) AS cache_miss_egress_bytes
+    SUM(ds.cdn_egress_quota) AS remaining_cdn_egress_bytes,
+    SUM(ds.cache_miss_egress_quota) AS remaining_cache_miss_egress_bytes
   FROM
     retrieval_logs rl
   JOIN

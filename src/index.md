@@ -241,14 +241,16 @@ const clientStats = Inputs.table(ClientStats, {
     payer_address: (v) => htl.html`<a href=./client/${v}>${v}</a>`,
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
+    remaining_cdn_egress_bytes: (v) => formatBytesIEC(v),
+    remaining_cache_miss_egress_bytes: (v) => formatBytesIEC(v),
   },
   sort: {
     total_egress_bytes: 'desc',
   },
   header: {
     payer_address: 'address',
-    total_egress_bytes: 'total_egress',
-    cache_miss_egress_bytes: 'cache_miss_egress',
+    total_egress_bytes: 'total_egress_used',
+    cache_miss_egress_bytes: 'cache_miss_egress_used',
   },
 })
 ```
