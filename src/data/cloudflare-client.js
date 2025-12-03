@@ -1,3 +1,5 @@
+import { assertOkResponse } from 'assert-ok-response'
+
 /**
  * @param {string} sql
  * @param {string[]} [params=[]] Default is `[]`
@@ -15,6 +17,6 @@ export const query = async (sql, params = []) => {
       body: JSON.stringify({ sql, params }),
     },
   )
-
+  await assertOkResponse(response)
   return await response.json()
 }
