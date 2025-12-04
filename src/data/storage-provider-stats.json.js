@@ -33,7 +33,7 @@ SELECT
     COUNT(*) AS total_requests,
     SUM(CASE WHEN spr.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
     SUM(spr.egress_bytes) AS total_egress_bytes,
-    SUM(CASE WHEN spr.cache_miss THEN spr.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
+    SUM(CASE WHEN spr.cache_miss AND spr.cache_miss_response_valid THEN spr.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
     AVG(CASE WHEN spr.cache_miss THEN spr.fetch_ttfb ELSE NULL END) AS avg_ttfb,
     ROUND(AVG(CASE WHEN spr.cache_miss THEN (spr.egress_bytes * 8.0) / (spr.fetch_ttlb / 1000.0) / 1_000_000 ELSE NULL END), 2) AS avg_cache_miss_retrieval_speed_mbps,
     (
