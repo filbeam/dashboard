@@ -8,7 +8,8 @@ const response = await query(
       COUNT(rl.id) AS total_requests,
       SUM(CASE WHEN rl.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
       SUM(rl.egress_bytes) AS total_egress_bytes,
-      SUM(CASE WHEN rl.cache_miss AND rl.cache_miss_response_valid THEN rl.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes
+      SUM(CASE WHEN rl.cache_miss AND rl.cache_miss_response_valid THEN rl.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
+      SUM(CASE WHEN rl.cache_miss AND NOT rl.cache_miss_response_valid THEN rl.egress_bytes ELSE 0 END) AS cache_miss_egress_invalid_bytes,
     FROM
       retrieval_logs rl
     JOIN

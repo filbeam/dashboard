@@ -216,14 +216,23 @@ const spStats = Inputs.table(StorageProviderStats, {
   format: {
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
+    cache_miss_egress_invalid_bytes: (v) => formatBytesIEC(v),
   },
   sort: {
     total_egress_bytes: 'desc',
   },
   header: {
-    owner_address: 'address',
-    total_egress_bytes: 'total_egress',
-    cache_miss_egress_bytes: 'cache_miss_egress',
+    service_provider_id: 'id',
+    service_url: 'service URL',
+    total_requests: 'requests',
+    cache_miss_requests: 'cache misses',
+    total_egress_bytes: 'total egress',
+    cache_miss_egress_bytes: 'cache miss egress',
+    cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
+    avg_ttfb: 'avg ttfb',
+    avg_cache_miss_retrieval_speed_mbps: 'avg cache miss retrieval speed (mbps)',
+    p95_cache_miss_retrieval_speed_mbps: 'p95 cache miss retrieval speed (mbps)',
+    cache_miss_rsr: 'cache miss rsr',
   },
 })
 ```
@@ -241,6 +250,7 @@ const clientStats = Inputs.table(ClientStats, {
     payer_address: (v) => htl.html`<a href=./client/${v}>${v}</a>`,
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
+    cache_miss_egress_invalid_bytes: (v) => formatBytesIEC(v),
     remaining_cdn_egress_bytes: (v) => formatBytesIEC(v),
     remaining_cache_miss_egress_bytes: (v) => formatBytesIEC(v),
   },
@@ -249,10 +259,13 @@ const clientStats = Inputs.table(ClientStats, {
   },
   header: {
     payer_address: 'address',
-    total_egress_bytes: 'total_egress_used',
-    cache_miss_egress_bytes: 'cache_miss_egress_used',
-    remaining_cdn_egress_bytes: 'remaining_cdn_egress',
-    remaining_cache_miss_egress_bytes: 'remaining_cache_miss_egress',
+    total_requests: 'requests',
+    cache_miss_requests: 'cache miss requests',
+    total_egress_bytes: 'egress',
+    cache_miss_egress_bytes: 'cache miss egress',
+    cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
+    remaining_cdn_egress_bytes: 'available cdn egress',
+    remaining_cache_miss_egress_bytes: 'available cache miss egress',
   },
 })
 ```
