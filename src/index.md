@@ -217,6 +217,10 @@ const spStats = Inputs.table(StorageProviderStats, {
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_invalid_bytes: (v) => formatBytesIEC(v),
+    avg_cache_miss_retrieval_speed_mbps: (v) => `${v} mbps`,
+    p95_cache_miss_retrieval_speed_mbps: (v) => `${v} mbps`,
+    avg_ttfb: (v) => `${v} ms`,
+    cache_miss_rsr: (v) => `${v} %`,
   },
   sort: {
     total_egress_bytes: 'desc',
@@ -228,8 +232,8 @@ const spStats = Inputs.table(StorageProviderStats, {
     cache_miss_egress_bytes: 'egress',
     cache_miss_egress_invalid_bytes: 'egress (invalid)',
     avg_ttfb: 'avg ttfb',
-    avg_cache_miss_retrieval_speed_mbps: 'avg speed (mbps)',
-    p95_cache_miss_retrieval_speed_mbps: 'p95 speed (mbps)',
+    avg_cache_miss_retrieval_speed_mbps: 'avg speed',
+    p95_cache_miss_retrieval_speed_mbps: 'p95 speed',
     cache_miss_rsr: 'rsr',
   },
 })
