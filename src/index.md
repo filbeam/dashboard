@@ -224,15 +224,15 @@ const spStats = Inputs.table(StorageProviderStats, {
   header: {
     service_provider_id: 'id',
     service_url: 'service URL',
-    cache_miss_requests: 'cache misses',
-    cache_miss_egress_bytes: 'cache miss egress',
-    cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
+    cache_miss_requests: 'requests',
+    cache_miss_egress_bytes: 'egress',
+    cache_miss_egress_invalid_bytes: 'egress (invalid)',
     avg_ttfb: 'avg ttfb',
     avg_cache_miss_retrieval_speed_mbps:
-      'avg cache miss retrieval speed (mbps)',
+      'avg speed (mbps)',
     p95_cache_miss_retrieval_speed_mbps:
-      'p95 cache miss retrieval speed (mbps)',
-    cache_miss_rsr: 'cache miss rsr',
+      'p95 speed (mbps)',
+    cache_miss_rsr: 'rsr',
   },
 })
 ```
