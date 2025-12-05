@@ -258,7 +258,7 @@ const clientStats = Inputs.table(ClientStats, {
   header: {
     payer_address: 'address',
     total_requests: 'requests',
-    cache_miss_requests: 'cache miss requests',
+    cache_miss_requests: 'cache misses',
     total_egress_bytes: 'egress',
     cache_miss_egress_bytes: 'cache miss egress',
     cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
