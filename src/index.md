@@ -230,8 +230,10 @@ const spStats = Inputs.table(StorageProviderStats, {
     cache_miss_egress_bytes: 'cache miss egress',
     cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
     avg_ttfb: 'avg ttfb',
-    avg_cache_miss_retrieval_speed_mbps: 'avg cache miss retrieval speed (mbps)',
-    p95_cache_miss_retrieval_speed_mbps: 'p95 cache miss retrieval speed (mbps)',
+    avg_cache_miss_retrieval_speed_mbps:
+      'avg cache miss retrieval speed (mbps)',
+    p95_cache_miss_retrieval_speed_mbps:
+      'p95 cache miss retrieval speed (mbps)',
     cache_miss_rsr: 'cache miss rsr',
   },
 })
