@@ -224,9 +224,7 @@ const spStats = Inputs.table(StorageProviderStats, {
   header: {
     service_provider_id: 'id',
     service_url: 'service URL',
-    total_requests: 'requests',
     cache_miss_requests: 'cache misses',
-    total_egress_bytes: 'total egress',
     cache_miss_egress_bytes: 'cache miss egress',
     cache_miss_egress_invalid_bytes: 'cache miss egress (invalid)',
     avg_ttfb: 'avg ttfb',

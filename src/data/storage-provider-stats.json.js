@@ -30,9 +30,7 @@ percentile_buckets AS (
 SELECT
     spr.service_provider_id,
     spr.service_url,
-    COUNT(*) AS total_requests,
     SUM(CASE WHEN spr.cache_miss THEN 1 ELSE 0 END) AS cache_miss_requests,
-    SUM(spr.egress_bytes) AS total_egress_bytes,
     SUM(CASE WHEN spr.cache_miss AND spr.cache_miss_response_valid THEN spr.egress_bytes ELSE 0 END) AS cache_miss_egress_bytes,
     SUM(CASE WHEN spr.cache_miss AND NOT spr.cache_miss_response_valid THEN spr.egress_bytes ELSE 0 END) AS cache_miss_egress_invalid_bytes,
     AVG(CASE WHEN spr.cache_miss THEN spr.fetch_ttfb ELSE NULL END) AS avg_ttfb,
@@ -55,7 +53,7 @@ FROM
 GROUP BY
     spr.service_provider_id
 ORDER BY
-    total_requests DESC;
+    cache_miss_requests DESC;
 `,
   [],
 )
