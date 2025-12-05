@@ -216,14 +216,25 @@ const spStats = Inputs.table(StorageProviderStats, {
   format: {
     total_egress_bytes: (v) => formatBytesIEC(v),
     cache_miss_egress_bytes: (v) => formatBytesIEC(v),
+    cache_miss_egress_invalid_bytes: (v) => formatBytesIEC(v),
+    avg_cache_miss_retrieval_speed_mbps: (v) => `${v} mbps`,
+    p95_cache_miss_retrieval_speed_mbps: (v) => `${Math.round(v)} mbps`,
+    avg_ttfb: (v) => `${Math.round(v)} ms`,
+    cache_miss_rsr: (v) => `${v} %`,
   },
   sort: {
-    total_egress_bytes: 'desc',
+    cache_miss_egress_bytes: 'desc',
   },
   header: {
-    owner_address: 'address',
-    total_egress_bytes: 'total_egress',
-    cache_miss_egress_bytes: 'cache_miss_egress',
+    service_provider_id: 'id',
+    service_url: 'url',
+    cache_miss_requests: 'requests',
+    cache_miss_egress_bytes: 'egress',
+    cache_miss_egress_invalid_bytes: 'egress (invalid)',
+    avg_ttfb: 'avg ttfb',
+    avg_cache_miss_retrieval_speed_mbps: 'avg speed',
+    p95_cache_miss_retrieval_speed_mbps: 'p95 speed',
+    cache_miss_rsr: 'rsr',
   },
 })
 ```
@@ -249,10 +260,12 @@ const clientStats = Inputs.table(ClientStats, {
   },
   header: {
     payer_address: 'address',
-    total_egress_bytes: 'total_egress_used',
-    cache_miss_egress_bytes: 'cache_miss_egress_used',
-    remaining_cdn_egress_bytes: 'remaining_cdn_egress',
-    remaining_cache_miss_egress_bytes: 'remaining_cache_miss_egress',
+    total_requests: 'requests',
+    cache_miss_requests: 'cache misses',
+    total_egress_bytes: 'egress',
+    cache_miss_egress_bytes: 'cache miss egress',
+    remaining_cdn_egress_bytes: 'available cdn egress',
+    remaining_cache_miss_egress_bytes: 'available cache miss egress',
   },
 })
 ```
