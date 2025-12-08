@@ -29,7 +29,7 @@ SELECT
 FROM
   retrieval_logs,
   percentiles
-WHERE retrieval_logs.timstamp > DATETIME('now', '-30 day');
+WHERE retrieval_logs.timestamp > DATETIME('now', '-30 day');
 `,
   [],
 )
