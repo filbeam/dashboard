@@ -48,7 +48,7 @@ const cacheHitRate = PlatformStats.total_requests
   : 0
 ```
 
-<h2>All time Stats</h2>
+<h2>30d Stats</h2>
 
 ```js
 const workerLatency = Inputs.table(

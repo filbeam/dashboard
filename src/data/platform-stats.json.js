@@ -7,6 +7,7 @@ const response = await query(
     worker_ttfb,
     NTILE(100) OVER (ORDER BY worker_ttfb) AS percentile_rank
   FROM retrieval_logs
+  WHERE timestamp > DATETIME('now', '-30 day')
 ),
 percentiles AS (
   SELECT
@@ -27,7 +28,8 @@ SELECT
   worker_ttfb_p99
 FROM
   retrieval_logs,
-  percentiles;
+  percentiles
+WHERE retrieval_logs.timstamp > DATETIME('now', '-30 day');
 `,
   [],
 )
